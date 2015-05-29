@@ -28,6 +28,10 @@ bool ChannelLoader::cycle() {
         }
     } catch (cereal::Exception &ex) {
         logger.error("cycle") << ex.what();
+
+        file.seekg(0, std::ios::beg);
+        header.deserialize(file);
+
         return false;
     }
 
