@@ -5,7 +5,7 @@ bool ChannelLoader::initialize() {
 
     std::string filePath = config->get<std::string>("file");
     file.open(filePath);
-    header.deserialize(file);
+    header.lmsDeserialize(file);
 
     // get write access for all channels that shall be serialized
     for(const std::string &channel : header.dataChannels) {
@@ -30,7 +30,7 @@ bool ChannelLoader::cycle() {
         logger.error("cycle") << ex.what();
 
         file.seekg(0, std::ios::beg);
-        header.deserialize(file);
+        header.lmsDeserialize(file);
 
         return false;
     }

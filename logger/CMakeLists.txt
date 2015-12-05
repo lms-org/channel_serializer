@@ -11,4 +11,4 @@ set (HEADERS
 include_directories("include")
 
 add_library (channel_logger MODULE ${SOURCES} ${HEADERS})
-target_link_libraries(channel_logger PRIVATE lms)
+target_link_libraries(channel_logger PRIVATE lmscore)

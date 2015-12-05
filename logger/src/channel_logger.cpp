@@ -14,7 +14,7 @@ bool ChannelLogger::initialize() {
     }
 
     file.open(directory + "/" + generateFileName() + ".cereal");
-    header.serialize(file);
+    header.lmsSerialize(file);
 
     return true;
 }
