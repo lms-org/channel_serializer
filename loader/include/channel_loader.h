@@ -17,10 +17,10 @@ public:
     bool deinitialize() override;
     bool cycle() override;
 private:
-    const lms::type::ModuleConfig *config;
-
     ProtocolHeader header;
     std::ifstream file;
+
+    std::vector<lms::WriteDataChannel<lms::Any>> channels;
 };
 
 #endif /* CHANNEL_LOADER_H */

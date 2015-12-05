@@ -19,7 +19,7 @@ public:
 private:
     std::string generateFileName();
 
-    const lms::type::ModuleConfig *config;
+    std::vector<lms::ReadDataChannel<lms::Any>> channels;
 
     ProtocolHeader header;
     std::ofstream file;

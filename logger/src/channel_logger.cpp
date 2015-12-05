@@ -2,15 +2,13 @@
 #include "protocol.h"
 
 bool ChannelLogger::initialize() {
-    config = getConfig();
+    std::string directory = config().get<std::string>("directory");
 
-    std::string directory = config->get<std::string>("directory");
-
-    header.dataChannels = config->getArray<std::string>("dataChannels");
+    header.dataChannels = config().getArray<std::string>("dataChannels");
 
     // get read access for all channels that shall be serialized
     for(const std::string &channel : header.dataChannels) {
-        datamanager()->getReadAccess(this, channel);
+        channels.push_back(readChannel<lms::Any>(channel));
     }
 
     file.open(directory + "/" + generateFileName() + ".cereal");
@@ -26,8 +24,10 @@ bool ChannelLogger::deinitialize() {
 }
 
 bool ChannelLogger::cycle() {
-    for(const std::string &channel : header.dataChannels) {
-        datamanager()->serializeChannel(this, channel, file);
+    for(auto const& ch : channels) {
+        if(! ch.serialize(file)) {
+            logger.error("cycle") << "Failed to serialize " << ch.name();
+        }
     }
 
     // write all buffered data into the physical file
