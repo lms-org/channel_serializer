@@ -14,12 +14,7 @@ struct ProtocolHeader : public lms::Serializable {
     CEREAL_SERIALIZATION()
 
     template<class Archive>
-    void save(Archive & archive) const {
-        archive( dataChannels );
-    }
-
-    template<class Archive>
-    void load(Archive & archive) {
+    void serialize(Archive & archive) {
         archive( dataChannels );
     }
 };

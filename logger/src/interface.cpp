@@ -1,7 +1,3 @@
 #include "channel_logger.h"
 
-extern "C" {
-void* getInstance() {
-    return new ChannelLogger();
-}
-}
+LMS_MODULE_INTERFACE(ChannelLogger)

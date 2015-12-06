@@ -1,7 +1,3 @@
 #include "channel_loader.h"
 
-extern "C" {
-void* getInstance() {
-    return new ChannelLoader();
-}
-}
+LMS_MODULE_INTERFACE(ChannelLoader)
