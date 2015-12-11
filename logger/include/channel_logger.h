@@ -1,7 +1,6 @@
 #ifndef CHANNEL_LOGGER_H
 #define CHANNEL_LOGGER_H
 
-#include "lms/datamanager.h"
 #include "lms/module.h"
 #include "lms/type/module_config.h"
 #include "protocol.h"

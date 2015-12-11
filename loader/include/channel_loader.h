@@ -1,7 +1,6 @@
 #ifndef CHANNEL_LOADER_H
 #define CHANNEL_LOADER_H
 
-#include "lms/datamanager.h"
 #include "lms/module.h"
 #include "lms/type/module_config.h"
 #include "protocol.h"
