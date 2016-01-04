@@ -2,7 +2,6 @@
 #define CHANNEL_LOGGER_H
 
 #include "lms/module.h"
-#include "lms/type/module_config.h"
 #include "protocol.h"
 
 #include <fstream>
@@ -16,8 +15,6 @@ public:
     bool deinitialize() override;
     bool cycle() override;
 private:
-    std::string generateFileName();
-
     std::vector<lms::ReadDataChannel<lms::Any>> channels;
 
     ProtocolHeader header;

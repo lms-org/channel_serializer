@@ -1,8 +1,7 @@
 #include "channel_loader.h"
 
 bool ChannelLoader::initialize() {
-    std::string filePath = config().get<std::string>("file");
-    file.open(filePath);
+    file.open(logFile("channels.cereal"));
     header.lmsDeserialize(file);
 
     // get write access for all channels that shall be serialized

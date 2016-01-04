@@ -2,7 +2,6 @@
 #define CHANNEL_LOADER_H
 
 #include "lms/module.h"
-#include "lms/type/module_config.h"
 #include "protocol.h"
 
 #include <fstream>
