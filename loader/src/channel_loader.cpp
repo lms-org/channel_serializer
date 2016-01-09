@@ -1,7 +1,12 @@
 #include "channel_loader.h"
 
 bool ChannelLoader::initialize() {
-    file.open(logFile("channels.cereal"));
+    if(! isEnableLoad()) {
+        logger.error() << "Command line option --enable-load was not specified";
+        return false;
+    }
+
+    file.open(loadLogFile("channels.cereal"));
     header.lmsDeserialize(file);
 
     // get write access for all channels that shall be serialized

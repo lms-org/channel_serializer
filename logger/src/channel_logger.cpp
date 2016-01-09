@@ -2,6 +2,11 @@
 #include "protocol.h"
 
 bool ChannelLogger::initialize() {
+    if(! isEnableSave()) {
+        logger.error() << "Command line option --enable-save was not specified";
+        return false;
+    }
+
     header.dataChannels = config().getArray<std::string>("dataChannels");
 
     // get read access for all channels that shall be serialized
@@ -9,7 +14,7 @@ bool ChannelLogger::initialize() {
         channels.push_back(readChannel<lms::Any>(channel));
     }
 
-    file.open(logFile("channels.cereal"));
+    file.open(saveLogFile("channels.cereal"));
     header.lmsSerialize(file);
 
     return true;
