@@ -6,7 +6,8 @@ bool ChannelLoader::initialize() {
         return false;
     }
 
-    file.open(loadLogFile("channels.cereal"));
+    std::string fileName = config().get<std::string>("fileName","channels");
+    file.open(saveLogFile(fileName+".cereal"));
     header.lmsDeserialize(file);
 
     // get write access for all channels that shall be serialized

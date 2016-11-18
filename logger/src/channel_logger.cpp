@@ -13,8 +13,8 @@ bool ChannelLogger::initialize() {
     for(const std::string &channel : header.dataChannels) {
         channels.push_back(readChannel<lms::Any>(channel));
     }
-
-    file.open(saveLogFile("channels.cereal"));
+    std::string fileName = config().get<std::string>("fileName","channels");
+    file.open(saveLogFile(fileName+".cereal"));
     header.lmsSerialize(file);
 
     return true;
