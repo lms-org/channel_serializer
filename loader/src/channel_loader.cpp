@@ -7,7 +7,7 @@ bool ChannelLoader::initialize() {
     }
 
     std::string fileName = config().get<std::string>("fileName","channels");
-    file.open(saveLogFile(fileName+".cereal"));
+    file.open(loadLogFile(fileName+".cereal"));
     header.lmsDeserialize(file);
 
     // get write access for all channels that shall be serialized
@@ -27,6 +27,9 @@ bool ChannelLoader::deinitialize() {
 bool ChannelLoader::cycle() {
     try {
         for(auto& ch : channels) {
+            if(!ch.isSerializable()){
+                logger.error("cycle")<<"channel is not deserialize "<<ch.name();
+            }
             if(! ch.deserialize(file)) {
                 logger.error("cycle") << "Failed to deserialize " << ch.name();
             }
